@@ -1,8 +1,9 @@
-from django.urls import path
-from .views import PostListCreateView, PostDetailView, LikeListCreateView
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet, PostViewSet, LikeViewSet
 
-urlpatterns = [
-    path('posts/', PostListCreateView.as_view(), name='post-list'),
-    path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('likes/', LikeListCreateView.as_view(), name='like-list'),
-]
+router = DefaultRouter()
+router.register(r"users", UserViewSet)
+router.register(r"posts", PostViewSet)
+router.register(r"likes", LikeViewSet)
+
+urlpatterns = router.urls
